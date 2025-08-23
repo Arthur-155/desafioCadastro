@@ -30,3 +30,19 @@
 5 - 6 anos
 6 - 30.0 kg
 7 - Vira-lata
+2025-08-23T15:53:50.737245800-BERI REDONDA.TXT
+1 - Beri Redonda
+2 - CACHORRO
+3 - FEMEA
+4 - null, 110, Rua Rio Beni
+5 - 6 anos
+6 - 25.0 kg
+7 - Vira-lata
+2025-08-23T15:58:36.101624-BERI BOLOTA.TXT
+1 - Beri Bolota
+2 - GATO
+3 - MACHO
+4 - Rua rio beni, 110, Maringá, PR
+5 - 8 anos
+6 - 12.0 kg
+7 - Siâmes

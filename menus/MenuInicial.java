@@ -16,7 +16,8 @@ public class MenuInicial {
             try {
                 Pet pet = new Pet();
                 Scanner leitor = new Scanner(System.in);
-                System.out.println("1- Cadastrar um novo pet\n" +
+                System.out.println(
+                        "1 - Cadastrar um novo pet\n" +
                         "2 - Alterar os dados do pet cadastrado\n" +
                         "3 - Deletar um pet cadastrado\n" +
                         "4 - Listar todos os pets cadastrados\n" +

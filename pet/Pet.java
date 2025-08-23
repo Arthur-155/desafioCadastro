@@ -1,13 +1,51 @@
 package pet;
 
 public class Pet {
-    private String nomeESobrenome;
-    private String tipoDoPet;
-    private String sexoDoAnimal;
-    private String enderecoEBairroEncontrado;
-    private int idadeAproximada;
+    private String nomeESobrenome,enderecoEBairroEncontrado,racaAnimal,cidade,rua;
+    private int idadeAproximada,numeroDaCasa;
     private double pesoAproximado;
-    private String racaAnimal;
+    private tipoAnimal tipoDoAnimal;
+    private sexoAnimal sexoDoAnimal;
+
+    public tipoAnimal getTipoDoAnimal() {
+        return tipoDoAnimal;
+    }
+
+    public void setTipoDoAnimal(tipoAnimal tipoDoAnimal) {
+        this.tipoDoAnimal = tipoDoAnimal;
+    }
+
+    public sexoAnimal getSexoDoAnimal() {
+        return sexoDoAnimal;
+    }
+
+    public void setSexoDoAnimal(sexoAnimal sexoDoAnimal) {
+        this.sexoDoAnimal = sexoDoAnimal;
+    }
+
+    public int getNumeroDaCasa() {
+        return numeroDaCasa;
+    }
+
+    public void setNumeroDaCasa(int numeroDaCasa) {
+        this.numeroDaCasa = numeroDaCasa;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
     public double getPesoAproximado() {
         return pesoAproximado;
@@ -67,7 +105,17 @@ public class Pet {
 
 
     public enum sexoAnimal {
-        FEMEA,
-        MACHO
+        FEMEA(1),
+        MACHO(2);
+
+        private final int valor;
+
+        sexoAnimal(int valor) {
+            this.valor = valor;
+        }
+
+        public int getValor() {
+            return valor;
+        }
     }
 }
