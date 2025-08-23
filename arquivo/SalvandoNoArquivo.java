@@ -1,20 +1,26 @@
 package arquivo;
 
 import pet.Pet;
+
+import javax.swing.text.DateFormatter;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class SalvandoNoArquivo {
 
+    // ano, mês, dia,T, hora, minuto - NOME+SOBRENOME
+
     public void salvarArquivo(Pet pet){
         try(FileWriter fw = new FileWriter("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt",true)){
             LocalDateTime agora = LocalDateTime.now();
-            LocalTime horaDeAgora = LocalTime.now();
-            LocalDateTime agoraFormatado = agora.toLocalDate().atTime(horaDeAgora);
-            fw.write(String.valueOf(agoraFormatado) + "-" + pet.getNomeESobrenome().toUpperCase() + ".TXT\n");
+            DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+            String agoraFormatado = agora.format(dataFormatada);
+            String semEspaco = pet.getNomeESobrenome().replaceAll("\\s+", "");
+            fw.write(agoraFormatado + "-" + semEspaco.toUpperCase().trim() + ".TXT\n");
             fw.write("1 - " + pet.getNomeESobrenome() + "\n");
             fw.write("2 - " + pet.getTipoDoAnimal() + "\n");
             fw.write("3 - " + pet.getSexoDoAnimal() + "\n");

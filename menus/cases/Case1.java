@@ -35,7 +35,7 @@ public class Case1 {
                     validacoes.conferindoSobrenomeAnimal(nomeESobrenome);
                     break;
                 case 2:
-                    System.out.println("1 - Cachorro\n2 - Gato: ");
+                    System.out.println("1 - Cachorro\n2 - Gato");
                     System.out.print("Escolha uma das duas opções: ");
                     opcao = leitor.nextInt();
                     switch(opcao){

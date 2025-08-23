@@ -46,3 +46,51 @@
 5 - 8 anos
 6 - 12.0 kg
 7 - Siâmes
+2025-08-23-16-40-ZURI MORGADO.TXT
+1 - Zuri Morgado
+2 - GATO
+3 - FEMEA
+4 - Rua Das Grevilhas, 120, Brasilia, DF
+5 - 4 anos
+6 - 12.0 kg
+7 - Siames
+202508231642-OZZY OSBORN.TXT
+1 - Ozzy Osborn
+2 - CACHORRO
+3 - MACHO
+4 - Rua Das Maravilhas, 510, Ponta Grossa
+5 - 8 anos
+6 - 8.0 kg
+7 - Chique
+202508231644-NAO SEI.TXT
+1 - nao sei
+2 - CACHORRO
+3 - FEMEA
+4 - naosei, 111, naosei
+5 - 5 anos
+6 - 21.0 kg
+7 - Vira-lata
+202508231648-NAO SEI.TXT
+1 - nao sei
+2 - CACHORRO
+3 - MACHO
+4 - nao sei, 210, Nao sei
+5 - 4 anos
+6 - 20.0 kg
+7 - Vira-lata
+202508231649-NAO SEI.TXT
+1 - nao sei
+2 - CACHORRO
+3 - FEMEA
+4 - naosei, 123, naosei
+5 - 2 anos
+6 - 21.0 kg
+7 - Vira-lata
+202508231652-NAOSEI.TXT
+1 - nao sei
+2 - CACHORRO
+3 - MACHO
+4 - nao sei, 123, nao sei
+5 - 2 anos
+6 - 32.0 kg
+7 - vira-lata
