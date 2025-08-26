@@ -2,17 +2,12 @@ package arquivo;
 
 import pet.Pet;
 
-import javax.swing.text.DateFormatter;
+
 import java.io.FileWriter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class SalvandoNoArquivo {
-
-    // ano, mês, dia,T, hora, minuto - NOME+SOBRENOME
 
     public void salvarArquivo(Pet pet){
         try(FileWriter fw = new FileWriter("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt",true)){

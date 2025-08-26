@@ -86,3 +86,11 @@
 5 - 2 anos
 6 - 21.0 kg
 7 - Vira-lata
+202508231652-NAOSEI.TXT
+1 - nao sei
+2 - CACHORRO
+3 - MACHO
+4 - nao sei, 123, nao sei
+5 - 2 anos
+6 - 32.0 kg
+7 - vira-lata
