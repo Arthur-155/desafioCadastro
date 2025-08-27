@@ -1,8 +1,6 @@
 package menus.cases;
 
-import arquivo.SalvandoNoArquivo;
 import pet.Pet;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -32,15 +30,12 @@ public class Case2 {
                 case 1:
                     System.out.println("Digite o nome Ou Sobrenome: ");
                     String termoPesquisado = leitor.nextLine();
-                    for(Pet cachorros: petsCadastrados){
-                        if(pet.getTipoDoAnimal() == Pet.tipoAnimal.CACHORRO){
-                            buscandoNoArquivo(termoPesquisado);
-                        }
-                    }
+                    buscandoNoArquivo(termoPesquisado);
+                    break;
+                case 2:
                     break;
             }
         }
-
     }
 
     public void perguntasFormulario (){
@@ -49,18 +44,36 @@ public class Case2 {
     }
 
     public void buscandoNoArquivo(String termoProcurado){
-        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
+        File arquivo = new File("C:\\Users\\Gustavo\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
+        boolean encontrou = false;
+        int contador = 1;
 
+            try(Scanner leitor = new Scanner(arquivo)){
+                List <String> linhasDoPet = new ArrayList<>();
+                while(leitor.hasNextLine()){
+                    String linha = leitor.nextLine();
+                    if(!linha.isBlank() && !linha.contains(".TXT")){
+                        if(linha.matches("\\d+\\s*-.*")){
+                            linhasDoPet.add(linha.split(" - ", 2)[1]);
+                        }
+                    }
 
+                    if(linhasDoPet.size() == 7 || !leitor.hasNextLine()){
+                        String petResumo = String.join(" - ", linhasDoPet);
+                        if(petResumo.toLowerCase().contains(termoProcurado.toLowerCase())){
+                            System.out.println(contador + "." + petResumo);
+                            encontrou = true;
+                            contador++;
+                        }
+                        linhasDoPet.clear();
+                    }
 
-        try(Scanner leitor = new Scanner(arquivo)){
-            String linha = leitor.nextLine();
-            if(linha.contains(termoProcurado)){
-                System.out.println(linha);
+                }
+            }catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
             }
-        }catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        if(!encontrou){
+            System.out.println("Nenhum pet encontrado com o termo: " + termoProcurado);
         }
     }
-
 }
