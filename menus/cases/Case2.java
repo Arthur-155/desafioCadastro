@@ -13,12 +13,12 @@ public class Case2 {
         int opcao,tipoAnimal;
         Scanner leitor = new Scanner(System.in);
         Pet pet = new Pet();
-        List<Pet>petsCadastrados = new ArrayList<>();
 
 
         System.out.println("1 - Cachorro\n2 - Gato");
         System.out.print("Qual tipo de animal é: ");
         tipoAnimal = leitor.nextInt();
+
         if(tipoAnimal == 1){
             pet.setTipoDoAnimal(Pet.tipoAnimal.CACHORRO);
             System.out.println("Você escolheu pesquisar cachorros!");
@@ -33,6 +33,29 @@ public class Case2 {
                     buscandoNoArquivo(termoPesquisado);
                     break;
                 case 2:
+                    System.out.println("Digite o Sexo: ");
+                    String sexoPesquisado = leitor.nextLine();
+                    buscandoNoArquivo(sexoPesquisado);
+                    break;
+            }
+
+        } else if (tipoAnimal == 2) {
+            pet.setTipoDoAnimal(Pet.tipoAnimal.GATO);
+            System.out.println("Você escolheu pesquisar Gatos!");
+            perguntasFormulario();
+            System.out.println("Por qual desses meios deseja buscar o perfil que deseja alterar: ");
+            opcao = leitor.nextInt();
+            leitor.nextLine();
+            switch (opcao){
+                case 1:
+                    System.out.println("Digite o nome Ou Sobrenome: ");
+                    String termoPesquisado = leitor.nextLine();
+                    buscandoNoArquivo(termoPesquisado);
+                    break;
+                case 2:
+                    System.out.println("Digite o Sexo: ");
+                    String sexoPesquisado = leitor.nextLine();
+                    buscandoNoArquivo(sexoPesquisado);
                     break;
             }
         }
@@ -50,6 +73,9 @@ public class Case2 {
 
             try(Scanner leitor = new Scanner(arquivo)){
                 List <String> linhasDoPet = new ArrayList<>();
+
+
+
                 while(leitor.hasNextLine()){
                     String linha = leitor.nextLine();
                     if(!linha.isBlank() && !linha.contains(".TXT")){
@@ -60,6 +86,15 @@ public class Case2 {
 
                     if(linhasDoPet.size() == 7 || !leitor.hasNextLine()){
                         String petResumo = String.join(" - ", linhasDoPet);
+                        String nome = linhasDoPet.get(0);
+                        String tipo = linhasDoPet.get(1);
+                        String sexo = linhasDoPet.get(2);
+                        String endereco = linhasDoPet.get(3);
+                        String idadeAproximada = linhasDoPet.get(4);
+                        String pesoAproximado = linhasDoPet.get(5);
+                        String raca = linhasDoPet.get(6);
+
+
                         if(petResumo.toLowerCase().contains(termoProcurado.toLowerCase())){
                             System.out.println(contador + "." + petResumo);
                             encontrou = true;
