@@ -3,6 +3,7 @@ package menus.cases;
 import pet.Pet;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,6 +38,49 @@ public class Case2 {
                     String sexoPesquisado = leitor.nextLine();
                     buscandoNoArquivo(sexoPesquisado);
                     break;
+                case 3:
+                    System.out.println("Digite a idade: ");
+                    int idade = leitor.nextInt();
+                    String stringIdade = String.valueOf(idade);
+                    buscandoNoArquivo(stringIdade);
+                    break;
+                case 4:
+                    System.out.println("Digite o peso: ");
+                    int peso = leitor.nextInt();
+                    String stringPeso = String.valueOf(peso);
+                    buscandoNoArquivo(stringPeso);
+                    break;
+                case 5:
+                    System.out.println("Digite a Raça do animal: ");
+                    String racaPesquisada = leitor.nextLine();
+                    buscandoNoArquivo(racaPesquisada);
+                    break;
+                case 6:
+                    System.out.println("Digite o endereço: ");
+                    String enderecoPesquisado = leitor.nextLine();
+                    buscandoNoArquivo(enderecoPesquisado);
+                    break;
+                case 7:
+                    System.out.println("Digite o nome e sobrenome e idade [Deve ser exato]: ");
+                    String informacaopesquisada = leitor.nextLine();
+                    buscandoNoArquivo(informacaopesquisada);
+                    break;
+                case 8:
+                    System.out.println("Digite o nome que deseja Pesquisar: ");
+                    String nomePesquisado = leitor.nextLine();
+                    buscandoNoArquivo(nomePesquisado);
+                    break;
+                case 9:
+                    System.out.println("Digite o sobrenome que deseja pesquisar: ");
+                    String sobrenomePesquisado = leitor.nextLine();
+                    buscandoNoArquivo(sobrenomePesquisado);
+                    break;
+                case 10:
+                    System.out.println("Digite a idade e peso que deseja pesquisar: ");
+                    int idadeEPeso = leitor.nextInt();
+                    String stringIdadeEPeso = String.valueOf(idadeEPeso);
+                    buscandoNoArquivo(stringIdadeEPeso);
+                    break;
             }
 
         } else if (tipoAnimal == 2) {
@@ -56,6 +100,49 @@ public class Case2 {
                     System.out.println("Digite o Sexo: ");
                     String sexoPesquisado = leitor.nextLine();
                     buscandoNoArquivo(sexoPesquisado);
+                    break;
+                case 3:
+                    System.out.println("Digite a idade: ");
+                    int idade = leitor.nextInt();
+                    String stringIdade = String.valueOf(idade);
+                    buscandoNoArquivo(stringIdade);
+                    break;
+                case 4:
+                    System.out.println("Digite o peso: ");
+                    int peso = leitor.nextInt();
+                    String stringPeso = String.valueOf(peso);
+                    buscandoNoArquivo(stringPeso);
+                    break;
+                case 5:
+                    System.out.println("Digite a Raça do animal: ");
+                    String racaPesquisada = leitor.nextLine();
+                    buscandoNoArquivo(racaPesquisada);
+                    break;
+                case 6:
+                    System.out.println("Digite o endereço: ");
+                    String enderecoPesquisado = leitor.nextLine();
+                    buscandoNoArquivo(enderecoPesquisado);
+                    break;
+                case 7:
+                    System.out.println("Digite o nome e sobrenome e idade [Deve ser exato]: ");
+                    String informacaopesquisada = leitor.nextLine();
+                    buscandoNoArquivo(informacaopesquisada);
+                    break;
+                case 8:
+                    System.out.println("Digite o nome que deseja Pesquisar: ");
+                    String nomePesquisado = leitor.nextLine();
+                    buscandoNoArquivo(nomePesquisado);
+                    break;
+                case 9:
+                    System.out.println("Digite o sobrenome que deseja pesquisar: ");
+                    String sobrenomePesquisado = leitor.nextLine();
+                    buscandoNoArquivo(sobrenomePesquisado);
+                    break;
+                case 10:
+                    System.out.println("Digite a idade e peso que deseja pesquisar: ");
+                    int idadeEPeso = leitor.nextInt();
+                    String stringIdadeEPeso = String.valueOf(idadeEPeso);
+                    buscandoNoArquivo(stringIdadeEPeso);
                     break;
             }
         }
@@ -100,6 +187,7 @@ public class Case2 {
                             encontrou = true;
                             contador++;
                         }
+
                         linhasDoPet.clear();
                     }
 
