@@ -62,8 +62,13 @@ public class Case2 {
                     break;
                 case 7:
                     System.out.println("Digite o nome e sobrenome e idade [Deve ser exato]: ");
-                    String informacaopesquisada = leitor.nextLine();
-                    buscandoNoArquivo(informacaopesquisada);
+                    String nomeAnimal = leitor.nextLine();
+                    System.out.println("Digite o sobrenome do Animal: ");
+                    String sobrenomeAnimal = leitor.nextLine();
+                    System.out.println("Digite a idade do animal: ");
+                    int idadeAnimal = leitor.nextInt();
+                    String stringIdadeAnimal = idadeAnimal + " anos";
+                    buscandoNoArquivo(nomeAnimal,sobrenomeAnimal,stringIdadeAnimal);
                     break;
                 case 8:
                     System.out.println("Digite o nome que deseja Pesquisar: ");
@@ -76,10 +81,13 @@ public class Case2 {
                     buscandoNoArquivo(sobrenomePesquisado);
                     break;
                 case 10:
-                    System.out.println("Digite a idade e peso que deseja pesquisar: ");
-                    int idadeEPeso = leitor.nextInt();
-                    String stringIdadeEPeso = String.valueOf(idadeEPeso);
-                    buscandoNoArquivo(stringIdadeEPeso);
+                    System.out.println("Digite a idade: ");
+                    idadeAnimal = leitor.nextInt();
+                    System.out.println("Digite o peso: ");
+                    int pesoAnimal = leitor.nextInt();
+                    String stringidadeAnimal = idadeAnimal + " anos";
+                    String stringPesoAnimal = pesoAnimal + ".0 kg";
+                    buscandoNoArquivo(stringidadeAnimal,stringPesoAnimal);
                     break;
             }
 
@@ -125,8 +133,13 @@ public class Case2 {
                     break;
                 case 7:
                     System.out.println("Digite o nome e sobrenome e idade [Deve ser exato]: ");
-                    String informacaopesquisada = leitor.nextLine();
-                    buscandoNoArquivo(informacaopesquisada);
+                    String nomeAnimal = leitor.nextLine();
+                    System.out.println("Digite o sobrenome do Animal: ");
+                    String sobrenomeAnimal = leitor.nextLine();
+                    System.out.println("Digite a idade do animal: ");
+                    int idadeAnimal = leitor.nextInt();
+                    String stringIdadeAnimal = idadeAnimal + " anos";
+                    buscandoNoArquivo(nomeAnimal,sobrenomeAnimal,stringIdadeAnimal);
                     break;
                 case 8:
                     System.out.println("Digite o nome que deseja Pesquisar: ");
@@ -139,10 +152,13 @@ public class Case2 {
                     buscandoNoArquivo(sobrenomePesquisado);
                     break;
                 case 10:
-                    System.out.println("Digite a idade e peso que deseja pesquisar: ");
-                    int idadeEPeso = leitor.nextInt();
-                    String stringIdadeEPeso = String.valueOf(idadeEPeso);
-                    buscandoNoArquivo(stringIdadeEPeso);
+                    System.out.println("Digite a idade: ");
+                    idadeAnimal = leitor.nextInt();
+                    System.out.println("Digite o peso: ");
+                    int pesoAnimal = leitor.nextInt();
+                    String stringidadeAnimal = idadeAnimal + " anos";
+                    String stringPesoAnimal = pesoAnimal + ".0 kg";
+                    buscandoNoArquivo(stringidadeAnimal,stringPesoAnimal);
                     break;
             }
         }
@@ -154,14 +170,12 @@ public class Case2 {
     }
 
     public void buscandoNoArquivo(String termoProcurado){
-        File arquivo = new File("C:\\Users\\Gustavo\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
+        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
         boolean encontrou = false;
         int contador = 1;
 
             try(Scanner leitor = new Scanner(arquivo)){
                 List <String> linhasDoPet = new ArrayList<>();
-
-
 
                 while(leitor.hasNextLine()){
                     String linha = leitor.nextLine();
@@ -170,24 +184,13 @@ public class Case2 {
                             linhasDoPet.add(linha.split(" - ", 2)[1]);
                         }
                     }
-
                     if(linhasDoPet.size() == 7 || !leitor.hasNextLine()){
                         String petResumo = String.join(" - ", linhasDoPet);
-                        String nome = linhasDoPet.get(0);
-                        String tipo = linhasDoPet.get(1);
-                        String sexo = linhasDoPet.get(2);
-                        String endereco = linhasDoPet.get(3);
-                        String idadeAproximada = linhasDoPet.get(4);
-                        String pesoAproximado = linhasDoPet.get(5);
-                        String raca = linhasDoPet.get(6);
-
-
                         if(petResumo.toLowerCase().contains(termoProcurado.toLowerCase())){
                             System.out.println(contador + "." + petResumo);
                             encontrou = true;
                             contador++;
                         }
-
                         linhasDoPet.clear();
                     }
 
@@ -197,6 +200,75 @@ public class Case2 {
             }
         if(!encontrou){
             System.out.println("Nenhum pet encontrado com o termo: " + termoProcurado);
+        }
+    }
+
+    public void buscandoNoArquivo(String termo1, String termo2){
+        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
+        boolean encontrou = false;
+        int contador = 1;
+
+        try(Scanner leitor = new Scanner(arquivo)){
+            List <String> linhasDoPet = new ArrayList<>();
+
+            while(leitor.hasNextLine()){
+                String linha = leitor.nextLine();
+                if(!linha.isBlank() && !linha.contains(".TXT")){
+                    if(linha.matches("\\d+\\s*-.*")){
+                        linhasDoPet.add(linha.split(" - ", 2)[1]);
+                    }
+                }
+                if(linhasDoPet.size() == 7 || !leitor.hasNextLine()){
+                    String petResumo = String.join(" - ", linhasDoPet);
+                    if(petResumo.toLowerCase().contains(termo1.toLowerCase()) && petResumo.toLowerCase().contains(termo2.toLowerCase())){
+                        System.out.println(contador + "." + petResumo);
+                        encontrou = true;
+                        contador++;
+                    }
+                    linhasDoPet.clear();
+                }
+
+            }
+        }catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(!encontrou){
+            System.out.println("Nenhum pet encontrado com o termo: " + termo1 + termo2);
+        }
+    }
+
+    public void buscandoNoArquivo(String termo1, String termo2, String termo3){
+        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
+        boolean encontrou = false;
+        int contador = 1;
+
+        try(Scanner leitor = new Scanner(arquivo)){
+            List <String> linhasDoPet = new ArrayList<>();
+
+            while(leitor.hasNextLine()){
+                String linha = leitor.nextLine();
+                if(!linha.isBlank() && !linha.contains(".TXT")){
+                    if(linha.matches("\\d+\\s*-.*")){
+                        linhasDoPet.add(linha.split(" - ", 2)[1]);
+                    }
+                }
+                if(linhasDoPet.size() == 7 || !leitor.hasNextLine()){
+                    String petResumo = String.join(" - ", linhasDoPet);
+                    if(petResumo.toLowerCase().contains(termo1.toLowerCase()) && petResumo.toLowerCase().contains(termo2.toLowerCase())
+                       &&petResumo.toLowerCase().contains(termo3.toLowerCase())){
+                        System.out.println(contador + "." + petResumo);
+                        encontrou = true;
+                        contador++;
+                    }
+                    linhasDoPet.clear();
+                }
+
+            }
+        }catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        if(!encontrou){
+            System.out.println("Nenhum pet encontrado com o termo: " + termo1 + termo2 + termo3);
         }
     }
 }
