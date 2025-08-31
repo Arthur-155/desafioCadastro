@@ -3,16 +3,18 @@ package menus.cases;
 import pet.Pet;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Case2 {
+    Scanner leitor = new Scanner(System.in);
 
     public void segundoCase(){
         int opcao,tipoAnimal;
-        Scanner leitor = new Scanner(System.in);
         Pet pet = new Pet();
 
 
@@ -31,7 +33,8 @@ public class Case2 {
                 case 1:
                     System.out.println("Digite o nome Ou Sobrenome: ");
                     String termoPesquisado = leitor.nextLine();
-                    buscandoNoArquivo(termoPesquisado);
+                    List <String> encontrados = buscandoNoArquivo(termoPesquisado);
+                    alterarPet(encontrados);
                     break;
                 case 2:
                     System.out.println("Digite o Sexo: ");
@@ -90,7 +93,6 @@ public class Case2 {
                     buscandoNoArquivo(stringidadeAnimal,stringPesoAnimal);
                     break;
             }
-
         } else if (tipoAnimal == 2) {
             pet.setTipoDoAnimal(Pet.tipoAnimal.GATO);
             System.out.println("Você escolheu pesquisar Gatos!");
@@ -102,7 +104,8 @@ public class Case2 {
                 case 1:
                     System.out.println("Digite o nome Ou Sobrenome: ");
                     String termoPesquisado = leitor.nextLine();
-                    buscandoNoArquivo(termoPesquisado);
+                    List <String> encontrados = buscandoNoArquivo(termoPesquisado);
+                    alterarPet(encontrados);
                     break;
                 case 2:
                     System.out.println("Digite o Sexo: ");
@@ -161,22 +164,21 @@ public class Case2 {
                     buscandoNoArquivo(stringidadeAnimal,stringPesoAnimal);
                     break;
             }
+
         }
     }
 
     public void perguntasFormulario (){
         System.out.println("1 - Nome Ou Sobrenome\n2 - Sexo\n3 - Idade\n4 - Peso\n5 - Raça\n6 - Endereço\n" +
-                "7 - Nome e Sobrenome e Idade\n8 - Nome\n9 - Sobrenome\n10 - Idade e Peso");
+                           "7 - Nome e Sobrenome e Idade\n8 - Nome\n9 - Sobrenome\n10 - Idade e Peso");
     }
 
-    public void buscandoNoArquivo(String termoProcurado){
+    public List<String> buscandoNoArquivo(String termoProcurado){
         File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
-        boolean encontrou = false;
-        int contador = 1;
+        List <String> linhasDoPet = new ArrayList<>();
+        List <String> petsEncontrados = new ArrayList<>();
 
             try(Scanner leitor = new Scanner(arquivo)){
-                List <String> linhasDoPet = new ArrayList<>();
-
                 while(leitor.hasNextLine()){
                     String linha = leitor.nextLine();
                     if(!linha.isBlank() && !linha.contains(".TXT")){
@@ -187,20 +189,22 @@ public class Case2 {
                     if(linhasDoPet.size() == 7 || !leitor.hasNextLine()){
                         String petResumo = String.join(" - ", linhasDoPet);
                         if(petResumo.toLowerCase().contains(termoProcurado.toLowerCase())){
-                            System.out.println(contador + "." + petResumo);
-                            encontrou = true;
-                            contador++;
+                            petsEncontrados.add(petResumo);
                         }
                         linhasDoPet.clear();
                     }
-
                 }
             }catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-        if(!encontrou){
+        if(petsEncontrados.isEmpty()){
             System.out.println("Nenhum pet encontrado com o termo: " + termoProcurado);
+        }else{
+            for(int i =0; i<petsEncontrados.size(); i++){
+                System.out.println(i+1 + ". " + petsEncontrados.get(i));
+            }
         }
+        return petsEncontrados;
     }
 
     public void buscandoNoArquivo(String termo1, String termo2){
@@ -271,4 +275,124 @@ public class Case2 {
             System.out.println("Nenhum pet encontrado com o termo: " + termo1 + termo2 + termo3);
         }
     }
-}
+
+    public void alterarPet(List <String> encontrados){
+       if(encontrados.isEmpty()){return;};
+
+        System.out.println("Escolha qual desses pets deseja alterar: ");
+        int escolha = leitor.nextInt();
+        leitor.nextLine();
+
+        if(escolha < 1 || escolha > encontrados.size() ){
+            System.out.println("Opção inválida");
+            return;
+        }
+
+        String petEscolhido =  encontrados.get(escolha-1);
+        System.out.println("Pet escolhido: " + petEscolhido);
+
+        String campos[] = petEscolhido.split(" - ");
+        for(int i =0; i<campos.length; i++){
+            campos[i] = campos[i].trim();
+        }
+
+        int opcao;
+        do{
+            System.out.println("1 - Nome\n2 - Endereço\n3 - Idade\n4 - Peso\n" +
+                               "5 - Raça\n0 - Salvar e Sair");
+            System.out.print("O que você deseja alterar nesse pet ?: ");
+            opcao = leitor.nextInt();
+            leitor.nextLine();
+
+            switch(opcao){
+                case 1:
+                    System.out.println("Digite o novo nome: ");
+                    campos[0]= leitor.nextLine().trim();
+                    break;
+                case 2:
+                    System.out.println("Digite o novo Endeço: ");
+                    campos[3]= leitor.nextLine().trim();
+                    break;
+                case 3:
+                    System.out.println("Digite a nova idade: ");
+                    int idade = leitor.nextInt();
+                    String stringIdade = String.valueOf(idade);
+                    if(!stringIdade.contains("anos")){
+                        campos[4]= idade + " anos";
+                    }else{
+                        campos[4] =  stringIdade;
+                    }
+                    break;
+                case 4:
+                    System.out.println("Digite o novo peso: ");
+                    int peso = leitor.nextInt();
+                    String stringPeso = String.valueOf(peso);
+                    if(!stringPeso.contains("kg")){
+                        campos[5]= stringPeso + " kg";
+                    }else {
+                        campos[5]= stringPeso;
+                    }
+                    break;
+                case 5:
+                    System.out.println("Digite a raça: ");
+                    campos[6]= leitor.nextLine().trim();
+                    break;
+                case 0:
+                    System.out.println("Voltando...");
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }while(opcao != 0);
+        String informacoesAtualizadas = String.join(" - ", campos);
+        atualizandoNoArquivo(petEscolhido,informacoesAtualizadas);
+        System.out.println("Pet atualizado: " +  informacoesAtualizadas);
+    }
+
+
+    public void atualizandoNoArquivo(String antigo, String novo) {
+        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
+        List<String> linhasDoArquivo = new ArrayList<>();
+        try (Scanner s = new Scanner(arquivo)) {
+            while (s.hasNextLine()) {
+                linhasDoArquivo.add(s.nextLine());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+        for (int i = 0; i < linhasDoArquivo.size(); i++) {
+            if (linhasDoArquivo.get(i).contains(antigo)) {
+                linhasDoArquivo.set(i, linhasDoArquivo.get(i).replace(antigo, novo));
+                break;
+            }
+        }
+
+        List<String> novaSaida = new ArrayList<>();
+        for (int i = 0; i < linhasDoArquivo.size(); ) {
+            if (linhasDoArquivo.get(i).isBlank()) {
+                novaSaida.add(linhasDoArquivo.get(i));
+                i++;
+                continue;
+            }
+
+            String linha = linhasDoArquivo.get(i);
+            if (!linha.matches("\\d+\\s*-.*")) {
+                novaSaida.add(linha);
+                i++;
+                continue;
+            }
+
+            try (FileWriter escrevendo = new FileWriter("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt", false)) {
+                for (String linhas : linhasDoArquivo) {
+                    escrevendo.write(linha + System.lineSeparator());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    }
