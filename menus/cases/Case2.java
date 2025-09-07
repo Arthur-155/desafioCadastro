@@ -1,11 +1,8 @@
 package menus.cases;
 
 import pet.Pet;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.SQLOutput;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -338,7 +335,7 @@ public class Case2 {
                     campos[6]= leitor.nextLine().trim();
                     break;
                 case 0:
-                    System.out.println("Voltando...");
+                    System.out.println("Salvando e Voltando...");
                     break;
                 default:
                     System.out.println("Opção inválida!");
@@ -354,45 +351,32 @@ public class Case2 {
     public void atualizandoNoArquivo(String antigo, String novo) {
         File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
         List<String> linhasDoArquivo = new ArrayList<>();
-        try (Scanner s = new Scanner(arquivo)) {
-            while (s.hasNextLine()) {
-                linhasDoArquivo.add(s.nextLine());
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+            String line;
+            while (( line=br.readLine())!=null ) {
+                linhasDoArquivo.add(line);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-
         for (int i = 0; i < linhasDoArquivo.size(); i++) {
-            if (linhasDoArquivo.get(i).contains(antigo)) {
-                linhasDoArquivo.set(i, linhasDoArquivo.get(i).replace(antigo, novo));
+            String l = linhasDoArquivo.get(i);
+            if (l.contains(antigo)) {
+                linhasDoArquivo.set(i,l.replace(antigo, novo));
                 break;
             }
         }
 
-        List<String> novaSaida = new ArrayList<>();
-        for (int i = 0; i < linhasDoArquivo.size(); ) {
-            if (linhasDoArquivo.get(i).isBlank()) {
-                novaSaida.add(linhasDoArquivo.get(i));
-                i++;
-                continue;
+        try (BufferedWriter escrevendo = new BufferedWriter(new FileWriter(arquivo,false))) {
+            for (String linhas : linhasDoArquivo) {
+                escrevendo.write(linhas);
+                escrevendo.newLine();
             }
-
-            String linha = linhasDoArquivo.get(i);
-            if (!linha.matches("\\d+\\s*-.*")) {
-                novaSaida.add(linha);
-                i++;
-                continue;
-            }
-
-            try (FileWriter escrevendo = new FileWriter("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt", false)) {
-                for (String linhas : linhasDoArquivo) {
-                    escrevendo.write(linha + System.lineSeparator());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         }
     }
 
-    }
+

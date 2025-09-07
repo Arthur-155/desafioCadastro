@@ -1,7 +1,5 @@
 package menus.validacoes;
 
-import java.util.regex.Matcher;
-
 public class Validacoes {
 
     private int opcoes;

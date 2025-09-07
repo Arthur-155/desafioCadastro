@@ -15,20 +15,17 @@ public class Case1 {
     SalvandoNoArquivo salvandoNoArquivo = new SalvandoNoArquivo();
     Validacoes validacoes = new Validacoes();
     int subOpcoes,opcao;
-    public String entrada;
 
 
     public void primeiroCase (){
         do{
             mostrarFormulario.mostrarFormulario();
             System.out.println("Escolha uma das opções: ");
-            entrada = leitor.nextLine();
-            subOpcoes = validacoes.conferindoCaracteresMenu(entrada,subOpcoes);
+            subOpcoes = leitor.nextInt();
+            leitor.nextLine();
 
             switch (subOpcoes) {
-
                 case 1:
-
                     System.out.println("Digite o nome e o Sobrenome do pet: ");
                     String nomeESobrenome = leitor.nextLine();
                     pet.setNomeESobrenome(nomeESobrenome);
