@@ -350,27 +350,57 @@ public class Case2 {
 
     public void atualizandoNoArquivo(String antigo, String novo) {
         File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
-        List<String> linhasDoArquivo = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-            String line;
-            while (( line=br.readLine())!=null ) {
-                linhasDoArquivo.add(line);
+        List<String> todasLinhasDoArquivo = new ArrayList<>();
+
+        try(Scanner sc = new Scanner(arquivo)){
+            while(sc.hasNextLine()){
+                todasLinhasDoArquivo.add(sc.nextLine());
             }
-        } catch (Exception e) {
+        }catch (FileNotFoundException e){
             throw new RuntimeException(e);
         }
 
-        for (int i = 0; i < linhasDoArquivo.size(); i++) {
-            String l = linhasDoArquivo.get(i);
-            if (l.contains(antigo)) {
-                linhasDoArquivo.set(i,l.replace(antigo, novo));
+        String [] novosCampos = novo.split(" - ");
+        if(novosCampos.length != 7){
+            System.out.println("O bloco não tem 7 campos" + novosCampos.length);
+            return;
+        }
+        boolean atualizou = false;
+
+        for(int i =0; i<todasLinhasDoArquivo.size(); ){
+            String linhas = todasLinhasDoArquivo.get(i).trim();
+            if(!linhas.toUpperCase().endsWith(".TXT")){
+                i++;
+                continue;
+            }
+
+            if(i+7 >= todasLinhasDoArquivo.size())break;
+
+            String[] valoresBloco = new String[7];
+            boolean blocoPreenchido = true;
+            for(int j = 0; j<7; j++){
+                String linhaDoBloco = todasLinhasDoArquivo.get(i + 1 + j);
+                int pos = linhaDoBloco.indexOf(" - ");
+                if(pos == -1){blocoPreenchido = false; break;}
+                valoresBloco[j] = linhaDoBloco.substring(pos+3).trim();
+            }
+            if(!blocoPreenchido){i++;continue;}
+
+            String blocosDoPet = String.join(" - ",valoresBloco);
+
+            if(blocosDoPet.equals(antigo)){
+                for (int j = 0; j<7; j++){
+                    todasLinhasDoArquivo.set(i +1 + j, (j+1) + " - " + novosCampos[j].trim());
+                }
+                atualizou = true;
                 break;
             }
+            i += 8;
         }
 
         try (BufferedWriter escrevendo = new BufferedWriter(new FileWriter(arquivo,false))) {
-            for (String linhas : linhasDoArquivo) {
-                escrevendo.write(linhas);
+            for (String l : todasLinhasDoArquivo) {
+                escrevendo.write(l);
                 escrevendo.newLine();
             }
         } catch (IOException e) {
