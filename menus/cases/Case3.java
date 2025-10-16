@@ -165,21 +165,28 @@ public class Case3 extends Case2{
         }
     }
     public boolean deletarPet(List<String>petBuscado){
-        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt");
-        List<String>blocoDoPetEncontrado = new ArrayList<>();
+        File arquivo = new File("C:\\Users\\Usuario\\IdeaProjects\\java\\desafioCadastro\\petsCadastrados\\petsCadastrados.txt"); //arquivo vai ler o arquivo
+        List<String>blocoDoPetEncontrado = new ArrayList<>(); //uma lista do tipo string com o nome blocoDoPetEncontrado
 
-        System.out.println("Escolha qual desses pets deseja deletar: ");
-        int escolha = leitor.nextInt();
-        leitor.nextLine();
+        System.out.println("Escolha qual desses pets deseja deletar: "); //mensagem que irá aparecer para o usuário
+        int escolha = leitor.nextInt(); // escolha irá armazenar o valor digitado para o usuário
+        leitor.nextLine(); //essa linha serve apenas para ter certeza que o próximo valor digitado não seja "Engolido"
 
+        //Esse if serve como validação, caso o usuário digite algum valor fora das opções "esperadas" dará Opção inválida
         if(escolha < 1 || escolha > petBuscado.size()){
             System.out.println("Opção inválida");
             return false;
         }
 
+        //opcaoEscolhida irá armazenar a lista passada por parametro -1, pois os blocos do arquivo
+        //cada um representa uma posição começando com 0, ou seja se o usuário escolher 1 para pet buscado
+        //vai ser correspondente ao bloco 0
         String opcaoEscolhida = petBuscado.get(escolha-1);
-        System.out.println("Pet escolhido: " + opcaoEscolhida);
+        System.out.println("Pet escolhido: " + opcaoEscolhida); // printa o pet escolhido
 
+        //fim de arquivo NÃO lança exceção. O while termina normalmente quando hasNextLine() for falso.
+        //Exceção só ocorre por erro de I/O (ex.: arquivo inacessível).
+        /* OBS: este break assume que blocos incompletos só aparecem no fim do arquivo. */
         try(Scanner lt = new Scanner(arquivo)){
             while (lt.hasNextLine()) {
                 blocoDoPetEncontrado.add(lt.nextLine());
@@ -188,7 +195,10 @@ public class Case3 extends Case2{
             throw new RuntimeException(e);
         }
 
+        //booleano setando deletou como falso
         boolean deletou = false;
+        //aqui é mapeado o cabeçalho de cada bloco, todos no cabeçalho tem uma linha que termina com .txt
+        //esse bloco serve para ignorar esse bloco .txt e ler apenas as próximas linhas
         for(int i =0; i<blocoDoPetEncontrado.size();){
            String resumo = blocoDoPetEncontrado.get(i).trim();
            if(!resumo.toUpperCase().endsWith(".TXT")){
@@ -196,10 +206,17 @@ public class Case3 extends Case2{
                continue;
            }
 
+           //se o bloco encontrado for maior ou igual a 7 ele sai da condicional
+            // isso serve para garantir que a estrutura está como esperado
            if (i+7 >= blocoDoPetEncontrado.size())break;
 
+           //é declarado um array de 7 posições
            String [] temp = new String[7];
+           //ao chegar aqui o boolean blocoPreenchido vira true, é esperado que aqui o bloco está como esperado, estruturalmente falando
            boolean blocoPreenchido = true;
+           //nesse for vemos linha a linha de cada bloco, i simboliza o bloco, enquanto j simboliza cada linha do bloco.
+           //juntamos tudo numa linha só, seperando cada linha do bloco original com um -
+           //se pos == -1 significa que a linha está mal formada sem o separado - , logo o bloco não está preenchido e a execução do if para.
            for(int j = 0; j < 7; j++){
                String blocoASerDeletado = blocoDoPetEncontrado.get(i+1+j);
                int pos = blocoASerDeletado.indexOf(" - ");
@@ -207,20 +224,27 @@ public class Case3 extends Case2{
                    blocoPreenchido = false;
                    break;
                }
+
+               /* substring(pos+3) pula ODO o separador " - " e captura apenas o valor à direita; depois trim() remove espaços. */
                 temp[j] = blocoASerDeletado.substring(pos+3).trim();
            }
+           //se o bloco estiver estruturalmente incorreto, parte para o próximo bloco
            if (!blocoPreenchido){i++;continue;}
-
+             /* junta os 7 campos em UMA string "c1 - c2 - ... - c7" para comparar com a opção escolhida.
+              A comparação é EXATA (equals). Diferenças de espaço/letras maiúsculas podem fazer falhar. */
            String blocoFinal = String.join(" - ",temp);
            if (blocoFinal.equals(opcaoEscolhida)){
+               /* Remove 8 linhas: 1 do cabeçalho (.txt) + 7 de dados do pet. */
                blocoDoPetEncontrado.subList(i, i+8).clear();
                deletou = true;
                break;
            }
+            /* Avança exatamente para o próximo bloco: pula cabeçalho + 7 linhas atuais. */
            i += 8;
         }
-
+        //aqui é caso o deletou ocorreu ou seja se o bloco o fluxo ocorreu como esperado
         if (deletou){
+            //aqui atualizamos o arquivo agora com -1 bloco, já que ele foi excluido.
             try(BufferedWriter reescrevendoAposDelete = new BufferedWriter(new FileWriter(arquivo,false))){
                 for(String deletar : blocoDoPetEncontrado){
                     reescrevendoAposDelete.write(deletar);
