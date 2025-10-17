@@ -3,6 +3,7 @@ package menus;
 import menus.cases.Case1;
 import menus.cases.Case2;
 import menus.cases.Case3;
+import menus.cases.Case4;
 import menus.validacoes.Validacoes;
 import pet.Pet;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ public class MenuInicial {
     Case1 case1 = new Case1();
     Case2 case2 = new Case2();
     Case3 case3 = new Case3();
+    Case4 case4 = new Case4();
     Validacoes validacoes = new Validacoes();
     public String entrada;
     int opcoes;
@@ -44,6 +46,10 @@ public class MenuInicial {
                         break;
                     case 3:
                         case3.terceiroCase();
+                        break;
+                    case 4:
+                        case4.listarPetsCadastrados();
+                        break;
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
