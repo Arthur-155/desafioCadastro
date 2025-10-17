@@ -38,28 +38,33 @@ public class Case3 extends Case2{
                     System.out.println("Digite o Sexo: ");
                     String sexoPesquisado = leitor.nextLine();
                     List<String>encontradoPeloSexo = buscandoNoArquivo(sexoPesquisado);
+                    deletarPet(encontradoPeloSexo);
                     break;
                 case 3:
                     System.out.println("Digite a idade: ");
                     int idade = leitor.nextInt();
                     String stringIdade = String.valueOf(idade);
                     List<String>encontradoPelaIdade = buscandoNoArquivo(stringIdade);
+                    deletarPet(encontradoPelaIdade);
                     break;
                 case 4:
                     System.out.println("Digite o peso: ");
                     int peso = leitor.nextInt();
                     String stringPeso = String.valueOf(peso);
                     List<String>encontradoPeloPeso = buscandoNoArquivo(stringPeso);
+                    deletarPet(encontradoPeloPeso);
                     break;
                 case 5:
                     System.out.println("Digite a Raça do animal: ");
                     String racaPesquisada = leitor.nextLine();
                     List<String>EncontradoPelaRaca = buscandoNoArquivo(racaPesquisada);
+                    deletarPet(EncontradoPelaRaca);
                     break;
                 case 6:
                     System.out.println("Digite o endereço: ");
                     String enderecoPesquisado = leitor.nextLine();
                     List<String>EncontradosPeloEndereco = buscandoNoArquivo(enderecoPesquisado);
+                    deletarPet(EncontradosPeloEndereco);
                     break;
                 case 7:
                     System.out.println("Digite o nome e sobrenome e idade [Deve ser exato]: ");
@@ -70,16 +75,19 @@ public class Case3 extends Case2{
                     int idadeAnimal = leitor.nextInt();
                     String stringIdadeAnimal = idadeAnimal + " anos";
                     List <String> encontradosPeloNomeSobrenomeIdade = buscandoNoArquivo(nomeAnimal,sobrenomeAnimal,stringIdadeAnimal);
+                    deletarPet(encontradosPeloNomeSobrenomeIdade);
                     break;
                 case 8:
                     System.out.println("Digite o nome que deseja Pesquisar: ");
                     String nomePesquisado = leitor.nextLine();
                     List<String>encontradosPeloNome = buscandoNoArquivo(nomePesquisado);
+                    deletarPet(encontradosPeloNome);
                     break;
                 case 9:
                     System.out.println("Digite o sobrenome que deseja pesquisar: ");
                     String sobrenomePesquisado = leitor.nextLine();
                     List<String>encontradosPeloSobrenome = buscandoNoArquivo(sobrenomePesquisado);
+                    deletarPet(encontradosPeloSobrenome);
                     break;
                 case 10:
                     System.out.println("Digite a idade: ");
@@ -89,6 +97,7 @@ public class Case3 extends Case2{
                     String stringidadeAnimal = idadeAnimal + " anos";
                     String stringPesoAnimal = pesoAnimal + ".0 kg";
                     List<String>encontradosPeloPesoIdade = buscandoNoArquivo(stringidadeAnimal,stringPesoAnimal);
+                    deletarPet(encontradosPeloPesoIdade);
                     break;
             }
         } else if (tipoAnimal == 2) {
@@ -103,34 +112,40 @@ public class Case3 extends Case2{
                     System.out.println("Digite o nome Ou Sobrenome: ");
                     String termoPesquisado = leitor.nextLine();
                     List <String> encontrados = buscandoNoArquivo(termoPesquisado);
+                    deletarPet(encontrados);
                     break;
                 case 2:
                     System.out.println("Digite o Sexo: ");
                     String sexoPesquisado = leitor.nextLine();
                     List<String>petEncontradoPeloSexo = buscandoNoArquivo(sexoPesquisado);
                     System.out.println(petEncontradoPeloSexo);
+                    deletarPet(petEncontradoPeloSexo);
                     break;
                 case 3:
                     System.out.println("Digite a idade: ");
                     int idade = leitor.nextInt();
                     String stringIdade = String.valueOf(idade);
                     List<String>petEncontradoPelaIdade = buscandoNoArquivo(stringIdade);
+                    deletarPet(petEncontradoPelaIdade);
                     break;
                 case 4:
                     System.out.println("Digite o peso: ");
                     int peso = leitor.nextInt();
                     String stringPeso = String.valueOf(peso);
                     List<String>petEncontradoPeloPeso = buscandoNoArquivo(stringPeso);
+                    deletarPet(petEncontradoPeloPeso);
                     break;
                 case 5:
                     System.out.println("Digite a Raça do animal: ");
                     String racaPesquisada = leitor.nextLine();
                     List<String>petEncontradoPelaRaca = buscandoNoArquivo(racaPesquisada);
+                    deletarPet(petEncontradoPelaRaca);
                     break;
                 case 6:
                     System.out.println("Digite o endereço: ");
                     String enderecoPesquisado = leitor.nextLine();
                     List<String>petEncontradoPeloEndereco = buscandoNoArquivo(enderecoPesquisado);
+                    deletarPet(petEncontradoPeloEndereco);
                     break;
                 case 7:
                     System.out.println("Digite o nome: ");
@@ -141,16 +156,19 @@ public class Case3 extends Case2{
                     int idadeAnimal = leitor.nextInt();
                     String stringIdadeAnimal = idadeAnimal + " anos";
                     List<String>PetEncontradoPeloNomeEIdade = buscandoNoArquivo(nomeAnimal,sobrenomeAnimal,stringIdadeAnimal);
+                    deletarPet(PetEncontradoPeloNomeEIdade);
                     break;
                 case 8:
                     System.out.println("Digite o nome que deseja Pesquisar: ");
                     String nomePesquisado = leitor.nextLine();
                     List<String>PetEncontradoPeloNome = buscandoNoArquivo(nomePesquisado);
+                    deletarPet(PetEncontradoPeloNome);
                     break;
                 case 9:
                     System.out.println("Digite o sobrenome que deseja pesquisar: ");
                     String sobrenomePesquisado = leitor.nextLine();
                     List<String>PetEncontradoPeloSobrenome = buscandoNoArquivo(sobrenomePesquisado);
+                    deletarPet(PetEncontradoPeloSobrenome);
                     break;
                 case 10:
                     System.out.println("Digite a idade e Peso: ");
@@ -160,6 +178,7 @@ public class Case3 extends Case2{
                     String stringidadeAnimal = idadeAnimal + " anos";
                     String stringPesoAnimal = pesoAnimal + ".0 kg";
                     List<String>PetEncontradoPelaIdadeEPeso = buscandoNoArquivo(stringidadeAnimal,stringPesoAnimal);
+                    deletarPet(PetEncontradoPelaIdadeEPeso);
                     break;
             }
         }
